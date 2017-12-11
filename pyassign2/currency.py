@@ -64,6 +64,7 @@ the Currency Exchange Table in http://www.cs.cornell.edu/courses/cs1110/\
     For example:
     >>>exchange("USD","EUR",2.5)
     >>>2.0952375
+    (This value may change at any specific time)
     """
     from urllib.request import urlopen
 
@@ -106,8 +107,9 @@ Currency amount is invalid." }') == 3
 def test_exchange():
     """To test whether the fuction 'exchange' can work normally or not.
     """
-    assert exchange("USD", "EUR", 2.5) == 2.0952375
-    assert exchange("CNY", "JPY", 0.5) == 8.3401833738115
+    exchange_rate = exchange("USD", "EUR", 2.5)
+    re_exchange_rate = exchange("EUR", "USD", exchange_rate)
+    assert re_exchange_rate == 2.5
 
 
 def test_all():
